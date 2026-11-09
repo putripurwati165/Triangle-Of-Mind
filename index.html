@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle of Mind</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Mono', monospace;
+            background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #09090b 70%);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .font-artistic-wavy {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+        .font-syne {
+            font-family: 'Syne', sans-serif;
+        }
+        .glow-triangle {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+        }
+        .glow-card {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-full items-center justify-between p-4 sm:p-6">
+
+    <!-- Top Navigation Bar -->
+    <header id="main-header" class="w-full max-w-2xl flex items-center justify-between py-2 border-b border-white/15">
+        <div class="flex items-center space-x-3">
+<img src="TM.pn
+g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">            
+            <h1 class="font-artistic-wavy text-amber-200 text-lg tracking-wide">Triangle of Mind</h1>
+        </div>
+        <div id="global-timer-container" class="hidden items-center space-x-2 bg-indigo-950/80 border border-indigo-500/30 px-3 py-1.5 rounded-xl shrink-0">
+            <span class="text-[10px] text-indigo-300 font-syne font-bold uppercase tracking-wider">Timer:</span>
+            <span id="global-timer" class="text-amber-300 font-bold font-mono text-xs">12:00</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-2xl flex-1 flex flex-col items-center justify-center py-6">
+
+        <!-- 1. WELCOME PAGE -->
+        <section id="page-welcome" class="w-full flex flex-col items-center text-center space-y-1 fade-in">
+            <div class="w-48 h-48 flex items-center justify-center -mb-6">
+    <img src="TM.png" alt="Logo Besar" class="w-48 h-48 object-contain rounded-xl">
+</div>
+            <div class="space-y-4">
+                <h2 class="font-artistic-wavy text-amber-200 text-2xl sm:text-3xl font-bold tracking-wide">Triangle of Mind</h2>
+            </div>
+            <div class="w-full max-w-xs space-y-4 pt-6">
+                <button onclick="goToPlayerSetup()" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-600 hover:opacity-95 text-white font-syne font-bold text-base rounded-2xl shadow-lg shadow-purple-900/40 transition transform active:scale-95 cursor-pointer">
+                    START GAME
+                </button>
+                <button onclick="openHowToPlay()" class="w-full py-2.5 bg-slate-900/80 border border-slate-700/60 hover:bg-slate-800 text-slate-200 font-syne font-bold text-base rounded-2xl transition cursor-pointer">
+                    HOW TO PLAY
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. HOW TO PLAY -->
+        <section id="page-how-to-play" class="w-full hidden flex flex-col space-y-6 fade-in py-4">
+            <div class="glow-card p-6 rounded-2xl space-y-6 text-sm text-slate-300">
+                <div class="space-y-2 text-center">
+                    <h3 class="font-syne font-bold text-amber-300 text-xs uppercase tracking-wider">DESCRIPTION</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">Triangle of Mind adalah permainan interaktif bertema Detective Syndicate. Permainan ini dirancang untuk menguji kerja sama tim, ketajaman logika, dan kemampuan memecahkan masalah dalam batas waktu tertentu. Para pemain berperan sebagai detektif yang memecahkan kasus berdasarkan tingkat kesulitan yang dipilih.</p>
+                </div>
+                <div class="space-y-3 pt-4 border-t border-white/10 text-center">
+                    <h3 class="font-syne font-bold text-amber-300 text-xs uppercase tracking-wider">HOW TO PLAY</h3>
+                    <div class="space-y-2 text-xs font-mono text-left pt-1">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
+                            <p>Masukkan nama 3 pemain yang akan berperan sebagai detektif sebelum memulai investigasi.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">2</span>
+                            <p>Pilih tingkat kesulitan kasus investigasi yang diinginkan (Easy, Medium, atau Hard).</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">3</span>
+                            <p>Satu pemain memulai investigasi terlebih dahulu berdasarkan petunjuk kasus utama yang tersedia.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">4</span>
+                            <p>Setiap pemain memiliki kesempatan untuk membuka kartu petunjuk sebanyak 1 kali pada setiap kategori. Kartu petunjuk yang didapat boleh diberitahukan kepada pemain lain, kecuali hasil jawaban.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">5</span>
+                            <p>Pemenang ditentukan berdasarkan jumlah jawaban benar serta kecepatan penyelesaian dalam batas waktu permainan selama 12 menit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="goToWelcome()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-syne font-bold rounded-xl transition cursor-pointer">
+                Back to Menu
+            </button>
+        </section>
+
+        <!-- 3. PLAYER SETUP -->
+        <section id="page-setup" class="w-full hidden flex flex-col space-y-6 fade-in max-w-md">
+            <div class="space-y-1 pt-2">
+                <h2 class="font-syne text-xl font-bold text-white tracking-wide">Registration Detective</h2>
+            </div>
+            <div class="glow-card p-6 rounded-2xl space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[11px] font-syne text-slate-400 tracking-wider uppercase">PLAYER 1</label>
+                    <input type="text" id="input-p1" placeholder="Enter your name" class="w-full px-4 py-3 bg-slate-900/90 border border-amber-500 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[11px] font-syne text-slate-400 tracking-wider uppercase">PLAYER 2</label>
+                    <input type="text" id="input-p2" placeholder="Enter your name" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm focus:border-amber-500 focus:shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[11px] font-syne text-slate-400 tracking-wider uppercase">PLAYER 3</label>
+                    <input type="text" id="input-p3" placeholder="Enter your name" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm focus:border-amber-500 focus:shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+                </div>
+                <div class="flex items-center space-x-3 pt-2">
+                    <button onclick="goToWelcome()" class="w-1/3 py-3.5 bg-slate-900 border border-slate-700 hover:bg-slate-800 text-white font-syne font-bold text-xs rounded-xl transition cursor-pointer">
+                        Back
+                    </button>
+                    <button onclick="goToLevelSelect()" class="w-2/3 py-3.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-600 hover:opacity-95 text-white font-syne font-bold text-xs rounded-xl shadow-lg transition cursor-pointer">
+                        CONTINUE
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. LEVEL SELECT -->
+        <section id="page-level-select" class="w-full hidden flex flex-col space-y-6 fade-in max-w-md">
+            <div class="text-center space-y-2 pt-2">
+                <h2 class="font-syne text-xl font-bold text-white tracking-wide">SELECT INVESTIGATION LEVEL</h2>
+            </div>
+            <div class="space-y-4">
+                <div onclick="selectLevel('easy')" class="glow-card p-5 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition cursor-pointer space-y-1">
+                    <div class="font-syne font-bold text-emerald-400 text-sm">LEVEL 1 — EASY</div>
+                    <div class="text-xs text-slate-400">Kasus pengetahuan dasar dengan petunjuk langsung dan analisis logika sederhana.</div>
+                </div>
+                <div onclick="selectLevel('medium')" class="glow-card p-5 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition cursor-pointer space-y-1">
+                    <div class="font-syne font-bold text-amber-400 text-sm">LEVEL 2 — MEDIUM</div>
+                    <div class="text-xs text-slate-400">Kasus dengan tingkat kesulitan menengah yang membutuhkan analisis hubungan sebab-akibat dari fenomena alam dan sains.</div>
+                </div>
+                <div onclick="selectLevel('hard')" class="glow-card p-5 rounded-2xl border border-rose-500/30 hover:border-rose-400 transition cursor-pointer space-y-1">
+                    <div class="font-syne font-bold text-rose-400 text-sm">LEVEL 3 — HARD</div>
+                    <div class="text-xs text-slate-400">Kasus kompleks dengan petunjuk abstrak yang membutuhkan pemikiran kritis dan tingkat logika yang tinggi untuk mengupas tuntas peristiwa sejarah, serta ekonomi.</div>
+                </div>
+            </div>
+            <div class="text-center pt-2">
+                <button onclick="goToPlayerSetup()" class="text-xs text-slate-400 hover:text-white underline font-mono cursor-pointer">
+                    ← Back to form Registration
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. INVESTIGATION BOARD -->
+        <section id="page-board" class="w-full hidden flex flex-col items-center space-y-6 fade-in py-2">
+            <div class="w-full glow-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+                <div>
+                    <div id="board-level-tag" class="text-[10px] font-syne font-bold text-amber-400 uppercase tracking-widest">LEVEL : EASY</div>
+                    <h2 id="case-title" class="font-syne text-lg font-bold text-white tracking-wide">Printer Macet di Pagi Buta</h2>
+                </div>
+                <button onclick="triggerFinishGame()" class="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-700 hover:opacity-90 text-white font-syne font-bold text-xs uppercase tracking-wider rounded-xl shadow transition cursor-pointer">
+                    Finish the Game
+                </button>
+            </div>
+
+            <h3 class="font-syne text-base font-bold text-slate-300 tracking-wide pt-1">Investigation Board</h3>
+
+            <!-- Triangle Layout Container -->
+            <div class="relative w-full max-w-sm mx-auto flex flex-col items-center" style="height: 380px;">
+                <!-- SVG Connecting Triangle Lines placed in background -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 360 360" preserveAspectRatio="none">
+                    <polygon points="180,15 35,340 325,340" fill="none" stroke="rgba(217, 119, 6, 0.45)" stroke-width="2" stroke-dasharray="6,6" />
+                </svg>
+
+                <!-- P1 Desk (Top Apex) -->
+                <div id="desk-card-1" class="absolute left-1/2 transform -translate-x-1/2 top-2 w-52 glow-card p-3 rounded-2xl border border-indigo-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
+                    <div class="w-full flex items-center justify-between text-[11px] font-syne">
+                        <span class="px-1.5 py-0.5 bg-indigo-900/80 rounded text-indigo-300 font-bold">P1</span>
+                        <span id="status-badge-1" class="px-2 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[9px]">Incomplete</span>
+                    </div>
+                    <div>
+                        <div id="desk-name-1" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Putri</div>
+                        <div class="text-[9px] text-slate-400 font-mono">WHO & WHEN</div>
+                    </div>
+                    <button onclick="openPlayerWorkspace(1)" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-syne font-bold text-[11px] rounded-xl transition cursor-pointer shadow">
+                        Open
+                    </button>
+                </div>
+
+                <!-- P2 Desk (Bottom Left Vertex) -->
+                <div id="desk-card-2" class="absolute left-0 bottom-4 w-36 glow-card p-2.5 rounded-2xl border border-purple-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
+                    <div class="w-full flex items-center justify-between text-[11px] font-syne">
+                        <span class="px-1.5 py-0.5 bg-purple-900/80 rounded text-purple-300 font-bold">P2</span>
+                        <span id="status-badge-2" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Incomplete</span>
+                    </div>
+                    <div>
+                        <div id="desk-name-2" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Dea</div>
+                        <div class="text-[9px] text-slate-400 font-mono">WHAT & WHERE</div>
+                    </div>
+                    <button onclick="openPlayerWorkspace(2)" class="w-full py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-syne font-bold text-[11px] rounded-xl transition cursor-pointer shadow">
+                        Open
+                    </button>
+                </div>
+
+                <!-- P3 Desk (Bottom Right Vertex) -->
+                <div id="desk-card-3" class="absolute right-0 bottom-4 w-36 glow-card p-2.5 rounded-2xl border border-amber-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
+                    <div class="w-full flex items-center justify-between text-[11px] font-syne">
+                        <span class="px-1.5 py-0.5 bg-amber-900/80 rounded text-amber-300 font-bold">P3</span>
+                        <span id="status-badge-3" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Incomplete</span>
+                    </div>
+                    <div>
+                        <div id="desk-name-3" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Aray</div>
+                        <div class="text-[9px] text-slate-400 font-mono">WHY & HOW</div>
+                    </div>
+                    <button onclick="openPlayerWorkspace(3)" class="w-full py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-syne font-bold text-[11px] rounded-xl transition cursor-pointer shadow">
+                        Open
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. INDIVIDUAL PLAYER WORKSPACE -->
+        <section id="page-workspace" class="w-full hidden flex flex-col space-y-4 fade-in py-2">
+            <div class="w-full glow-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+                <div>
+                    <h3 id="ws-player-title" class="font-syne font-bold text-base text-white">Investigation</h3>
+                </div>
+                <div>
+                    <button onclick="closePlayerWorkspace()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-syne font-bold text-xs rounded-xl transition cursor-pointer">
+                        Back
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Switcher for Assigned Categories -->
+            <div id="ws-tabs-container" class="grid grid-cols-2 gap-3">
+                <!-- Injected tabs -->
+            </div>
+
+            <!-- Active Question Workspace Card -->
+            <div class="glow-card p-5 rounded-2xl space-y-4 border border-slate-700/60">
+                <div class="space-y-1">
+                    <span class="text-[10px] font-syne text-amber-400 font-bold uppercase tracking-wider">Case Clue</span>
+                    <p id="ws-clue-text" class="text-xs text-slate-300 font-mono italic">Printer Macet di Pagi Buta</p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-xs font-syne text-slate-400">
+                        <span>Choose 1 Secret Card</span>
+                        <span class="text-[10px] text-amber-400 font-mono">Limited (Max 1)</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-indigo-950/60 border border-slate-700/60 p-3 rounded-xl space-y-2">
+                            <div class="flex items-center justify-between text-[11px] font-syne">
+                                <span class="text-indigo-200">Card #1 (3 Words)</span>
+                                <span id="card-status-1" class="text-[10px] text-slate-400 font-mono">Locked</span>
+                            </div>
+                            <div id="card-desc-1" class="text-[11px] text-slate-400 italic">[Locked — Click Open Clue]</div>
+                            <button onclick="openSecretCard(1)" class="w-full py-2 bg-indigo-600/80 hover:bg-indigo-500 text-white font-syne font-bold text-[11px] rounded-lg transition cursor-pointer">
+                                Open Clue
+                            </button>
+                        </div>
+                        <div class="bg-indigo-950/60 border border-slate-700/60 p-3 rounded-xl space-y-2">
+                            <div class="flex items-center justify-between text-[11px] font-syne">
+                                <span class="text-indigo-200">Card #2 (Visual Description)</span>
+                                <span id="card-status-2" class="text-[10px] text-slate-400 font-mono">Locked</span>
+                            </div>
+                            <div id="card-desc-2" class="text-[11px] text-slate-400 italic">[Locked — Click Open Clue]</div>
+                            <button onclick="openSecretCard(2)" class="w-full py-2 bg-indigo-600/80 hover:bg-indigo-500 text-white font-syne font-bold text-[11px] rounded-lg transition cursor-pointer">
+                                Open Clue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 pt-2">
+                    <label class="text-[11px] font-syne text-slate-400 uppercase tracking-wider">Your Answer (Secret)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="ws-answer-input" placeholder="Ketik jawaban Anda di sini..." class="flex-1 px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-xs">
+                        <button onclick="saveActiveCategoryAnswer()" class="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:opacity-95 text-white font-syne font-bold text-xs rounded-xl shadow transition cursor-pointer">
+                            SAVE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. RESULTS PAGE -->
+        <section id="page-results" class="w-full hidden space-y-6 fade-in py-2">
+            <div class="text-center space-y-1">
+                <div class="w-14 h-14 mx-auto glow-card border border-amber-600/40 rounded-2xl flex items-center justify-center glow-triangle mb-2">
+                    <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-artistic-wavy text-amber-300 text-lg font-bold tracking-wide">Congratulations</h3>
+                <h2 class="font-syne text-xl font-bold text-white tracking-wide">Investigation Results</h2>
+            </div>
+
+            <!-- Triangle Stack Podium Layout matching reference image -->
+            <div class="relative w-full max-w-xs mx-auto flex flex-col items-center py-2 space-y-0.5">
+                <!-- 1st Winner (Top Triangle Layer) -->
+                <div id="podium-tier-1" class="w-48 h-16 bg-gradient-to-tr from-emerald-600 via-teal-600 to-teal-700 text-white flex flex-col items-center justify-center text-center shadow-xl relative z-30" style="clip-path: polygon(50% 0%, 100% 100%, 0% 100%);"></div>
+                <!-- 2nd Winner (Middle Trapezoid Layer) -->
+                <div id="podium-tier-2" class="w-64 h-14 bg-gradient-to-r from-pink-600 via-rose-600 to-pink-700 text-white flex flex-col items-center justify-center text-center shadow-xl relative z-20" style="clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);"></div>
+                <!-- 3rd Winner (Bottom Trapezoid Layer) -->
+                <div id="podium-tier-3" class="w-80 h-14 bg-gradient-to-r from-red-800 via-rose-800 to-red-900 text-white flex flex-col items-center justify-center text-center shadow-xl relative z-10" style="clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);"></div>
+            </div>
+
+            <!-- View Details Accordion -->
+            <div class="glow-card border p-5 rounded-2xl space-y-4">
+                <h3 class="font-syne text-base font-bold text-white mb-2">View Details</h3>
+                <div id="results-breakdown-list" class="space-y-3"></div>
+            </div>
+
+            <div class="text-center pt-2">
+                <button onclick="goToWelcome()" class="px-8 py-3.5 bg-gradient-to-r from-indigo-700 via-purple-800 to-amber-700 hover:opacity-95 text-white font-syne font-bold text-xs rounded-xl shadow-lg transition cursor-pointer">
+                    Play Again
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-2xl py-4 text-center text-xs text-slate-500 font-mono border-t border-white/5"></footer>
+
+    <!-- Application Script -->
+    <script>
+        const casesData = {
+            easy: [
+                {
+                    title: "Printer Macet di Pagi Buta",
+                    clues: {
+                        who: { c1: "Begadang, Mahasiswa, Kelelahan", c2: "Mahasiswa membungkuk di depan laptop dengan cangkir kopi dingin", key: "Mahasiswa" },
+                        when: { c1: "Dini, Subuh, Malam", c2: "Jendela kamar gelap gulita, hanya diterangi lampu belajar kecil", key: "Dini hari" },
+                        what: { c1: "Macet, Rusak, Gagal", c2: "Baki printer macet karena kertas tersangkut dan lampu indikator merah berkedip", key: "Printer rusak" },
+                        where: { c1: "Kamar, Meja, Sudut", c2: "Meja kayu penuh tumpukan buku diktat dan kabel semrawut", key: "Di meja belajar" },
+                        why: { c1: "Deadline, Tugas, Panik", c2: "Layar laptop menampilkan dokumen tugas dengan status belum tersimpan pukul 0345", key: "deadline" },
+                        how: { c1: "Tumpah, Cabut, Basah", c2: "Genangan air kecoklatan di pinggir meja dan handuk basah di samping stopkontak", key: "teh tumpah" }
+                    }
+                },
+                {
+                    title: "Es Krim yang Menghilang di Kulkas",
+                    clues: {
+                        who: { c1: "Keponakan, Anak, Balita", c2: "Jejak tapak sepatu anak balita berlumpur tipis di lantai keramik", key: "Keponakan" },
+                        when: { c1: "Siang, Pagi, Jam", c2: "Jam dinding dapur menunjukkan pukul 1015 pagi, halaman luar terang benderang", key: "Pagi menjelang siang" },
+                        what: { c1: "Habis, Lenyap, Kosong", c2: "Kotak es krim literan kosong dengan sisa lelehan putih di dasarnya", key: "Es krim" },
+                        where: { c1: "Dapur, Kulkas, Kotak", c2: "Pintu kulkas terbuka lebar menyoroti rak freezer yang kosong", key: "dapur" },
+                        why: { c1: "Ingin, Manis, Lapar", c2: "Kursi plastik kecil digeser mendekat ke meja dapur depan lemari es", key: "camilan" },
+                        how: { c1: "Ambil, Buang, Geser", c2: "Tutup wadah es krim terselip di dalam wadah tempat sampah dapur", key: "sepatu bot" }
+                    }
+                },
+                {
+                    title: "Tanaman Hias Paling Disayang Mati Kering",
+                    clues: {
+                        who: { c1: "Kakak, Petugas, Keluarga", c2: "Jadwal piket mingguan di dinding dengan nama Kakak dilingkari spidol merah", key: "Kakak" },
+                        when: { c1: "Minggu, Pekan, Lama", c2: "Selembar daun kering jatuh melayang menimpa lantai berdebu tipis", key: "beberapa pekan" },
+                        what: { c1: "Layu, Mati, Kering", c2: "Tanaman hias dalam pot keramik dengan daun merunduk dan menguning rapuh", key: "kekeringan" },
+                        where: { c1: "Tamu, Sudut, Ruangan", c2: "Pot tanaman di atas meja kecil sudut ruang tamu yang terkena matahari langsung", key: "ruang tamu" },
+                        why: { c1: "Lupa, Lalai, Salah", c2: "Kalender meja yang halamannya masih menunjukkan bulan lalu dan belum dibalik", key: "Lalai" },
+                        how: { c1: "Biar, Abaikan, Diam", c2: "Ember penyiram tanaman plastik hijau terisi air penuh mengendap di sebelah pot", key: "belum tiba" }
+                    }
+                }
+            ],
+            medium: [
+                {
+                    title: "Misteri Danau yang Bisa Berubah Warna",
+                    clues: {
+                        who: { c1: "Bakteri, Alga, Mikroorganisme", c2: "Ilustrasi mikroorganisme berwarna-warni yang terlihat melalui mikroskop di dalam sampel air danau", key: "Mikroorganisme" },
+                        what: { c1: "Berubah, Warna, Pigmen", c2: "Sebuah danau dengan warna air yang terbagi menjadi beberapa bagian, yaitu merah muda, hijau, dan biru", key: "perubahan warna" },
+                        where: { c1: "Danau, Vulkanik, Asin", c2: "Pemandangan danau dengan warna air mencolok yang dikelilingi bebatuan dan pegunungan", key: "Danau dengan kondisi" },
+                        when: { c1: "Panas, Kemarau, Berubah", c2: "Danau yang terlihat memiliki warna berbeda saat terkena sinar matahari pada musim panas", key: "Ketika suhu" },
+                        why: { c1: "Garam, Suhu, Nutrisi", c2: "Ilustrasi air danau dengan konsentrasi garam berbeda dan mikroorganisme yang berkembang di dalamnya", key: "Perubahan kondisi kimia" },
+                        how: { c1: "Pigmen, Mineral, Reaksi", c2: "Perbandingan sampel air danau yang memiliki warna berbeda akibat kandungan mikroorganisme dan mineral", key: "Mikroorganisme menghasilkan pigmen" }
+                    }
+                },
+                {
+                    title: "Misteri Batu yang Bisa Bergerak Sendiri",
+                    clues: {
+                        who: { c1: "Angin, Es, Alam", c2: "Sebuah batu besar berada di atas permukaan tanah berlumpur dengan lapisan es tipis di sekitarnya", key: "Faktor alam" },
+                        what: { c1: "Bergerak, Bergeser, Berpindah", c2: "Sebuah batu besar di tengah tanah datar dengan jejak panjang di belakangnya", key: "Sailing Stones" },
+                        where: { c1: "Gurun, California, Death Valley", c2: "Hamparan tanah kering yang luas dengan batu-batu besar meninggalkan jejak di permukaannya", key: "Racetrack Playa" },
+                        when: { c1: "Dingin, Hujan, Musim", c2: "Permukaan danau kering yang tergenang air tipis dan memiliki lapisan es pada pagi hari", key: "Ketika kondisi musim dingin" },
+                        why: { c1: "Angin, Licin, Gesekan", c2: "Batu besar yang dikelilingi pecahan es tipis di atas permukaan tanah basah", key: "Angin mendorong lapisan es" },
+                        how: { c1: "Membeku, Mencair, Terdorong", c2: "Ilustrasi batu yang perlahan bergeser karena dorongan angin melalui lapisan es tipis", key: "Saat suhu turun" }
+                    }
+                },
+                {
+                    title: "Misteri Hujan yang Turun dari Langit Tanpa Awan Gelap",
+                    clues: {
+                        who: { c1: "Atmosfer, Uap, Air", c2: "Ilustrasi proses pembentukan awan dan uap air yang naik dari permukaan bumi", key: "Uap air di atmosfer" },
+                        what: { c1: "Hujan, Cerah, Lokal", c2: "Seseorang sedang kehujanan di jalan, sementara langit di sekitarnya masih terlihat cerah", key: "hujan lokal" },
+                        where: { c1: "Tropis, Pesisir, Daratan", c2: "Pemandangan sebuah desa yang sebagian wilayahnya diguyur hujan, sedangkan wilayah lainnya tetap kering", key: "Di wilayah tertentu" },
+                        when: { c1: "Siang, Sore, Panas", c2: "Matahari bersinar terang, tetapi terlihat hujan turun di salah satu bagian wilayah", key: "Dapat terjadi ketika" },
+                        why: { c1: "Awan, Angin, Kelembapan", c2: "Awan hujan berada di satu sisi langit, sementara sisi lainnya tampak cerah", key: "Hujan hanya terjadi" },
+                        how: { c1: "Menguap, Mengembun, Mengendap", c2: "Ilustrasi siklus air yang menunjukkan penguapan, pembentukan awan, dan turunnya hujan", key: "Air menguap" }
+                    }
+                }
+            ],
+            hard: [
+                {
+                    title: "Surat Perintah yang Mengubah Kekuasaan",
+                    clues: {
+                        who: { c1: "Presiden, Jenderal, Pengemban", c2: "Naskah dokumen resmi bertandatangan di atas meterai dengan cap kepresidenan dan foto tiga orang perwira tinggi militer berdiri di belakang meja kerja", key: "Jenderal Soeharto" },
+                        what: { c1: "Peralihan, Mandat, Kekuasaan", c2: "Lembaran kertas arsip tua berisikan ketikan mesin tik formal dengan coretan tangan koreksi di beberapa bagian kalimatnya", key: "Penyerahan mandat" },
+                        where: { c1: "Bogor, Istana, Jawa", c2: "Pintu gerbang istana peninggalan kolonial berpadu dengan taman luas dan rusa-rusa yang berkeliaran di halaman hijau", key: "Istana Kepresidenan Bogor" },
+                        when: { c1: "Maret, Tahun, Enam", c2: "Kalender meja lawas menunjukkan angka tanggal sebelas bulan ketiga tahun seribu sembilan ratus enam puluh enam", key: "11 Maret 1966" },
+                        why: { c1: "Keamanan, Krisis, Darurat", c2: "Suasana jalanan ibu kota yang tegang dipenuhi barisan mahasiswa berjaket almamater melakukan aksi demonstrasi besar-besaran", key: "Kondisi keamanan" },
+                        how: { c1: "Utusan, Todong, Paksa", c2: "Tiga orang jenderal militer bergegas masuk membawa map hitam di hadapan meja kepala negara yang tampak terisolasi", key: "Melalui utusan" }
+                    }
+                },
+                {
+                    title: "Revolusi Pencatatan Keuangan di Era Renaisans",
+                    clues: {
+                        who: { c1: "Biarawan, Matematikawan, Penulis", c2: "Patung biarawan mengenakan jubah cokelat sedang memegang jilid buku tebal di halaman gereja tua Italia", key: "Luca Pacioli" },
+                        what: { c1: "Buku, Catatan, Debet", c2: "Halaman naskah kuno bergaris dengan kolom angka bersisian yang bertuliskan kata Debit dan Credit menggunakan pena bulu", key: "pembukuan berpasangan" },
+                        where: { c1: "Italia, Venesia, Biara", c2: "Kanal air kota pelabuhan kuno dengan perahu gondola berlatar arsitektur bangunan Renaisans Eropa", key: "Kota Venesia" },
+                        when: { c1: "Abad, Lima, Belas", c2: "Penanggalan Romawi kuno yang menunjukkan tahun 1494 di sampul buku tua kulit domba", key: "Tahun 1494" },
+                        why: { c1: "Dagang, Hitung, Transaksi", c2: "Meja pasar pedagang rempah dengan timbangan kuno, koin emas, dan catatan gulungan kertas dagang", key: "Kebutuhan para pedagang" },
+                        how: { c1: "Keseimbangan, Sisi, Ganda", c2: "Dua piring timbangan emas yang berada di dalam posisi seimbang sempurna di atas meja kerja", key: "Mencatat setiap transaksi" }
+                    }
+                },
+                {
+                    title: "Awal Mula Korporasi Multinasional dan Pasar Saham Modern",
+                    clues: {
+                        who: { c1: "Kongsi, Saudagar, Negara", c2: "Segel lilin kerajaan berukir singa berdiri di atas dokumen piagam resmi kerajaan berhuruf latin tebal", key: "pedagang Belanda" },
+                        what: { c1: "Saham, Monopoli, Korporasi", c2: "Sertifikat kepemilikan modal bertuliskan angka nominal gulden pertama di dunia dengan bingkai ukiran seni klasik", key: "persekutuan dagang" },
+                        where: { c1: "Amsterdam, Pelabuhan, Laut", c2: "Kapal layar besar berm tiang tinggi berjejer di pelabuhan sibuk dengan muatan peti kayu rempah-rempah", key: "Amsterdam" },
+                        when: { c1: "Enam, Ratus, Dua", c2: "Jam matahari kuno di dinding dermaga menunjukkan tahun penjelajahan samudra di awal abad ketujuh belas", key: "Tahun 1602" },
+                        why: { c1: "Risiko, Modal, Bagi", c2: "Peti harta karun berisi koin perak yang dibagi-bagi ke dalam banyak kantong kecil di hadapan para investor", key: "Kebutuhan untuk menghimpun" },
+                        how: { c1: "Publik, Jual, Gabung", c2: "Bursa efek pertama di dunia berupa gedung bursa terbuka tempat orang-orang bertukar lembar sertifikat kertas modal", key: "Menggabungkan beberapa kongsi" }
+                    }
+                },
+                {
+                    title: "Perundingan di Bawah Tekanan Militer",
+                    clues: {
+                        who: { c1: "Delegasi, Perunding, Perdana", c2: "Meja bundar panjang dikelilingi pria-pria berjas rapi mengenakan peci hitam di satu sisi dan setelan jas Eropa di sisi seberang", key: "Perwakilan Republik" },
+                        what: { c1: "Perjanjian, Pengakuan, De-facto", c2: "Selembar dokumen tua bermeterai dengan tanda tangan tinta hitam di atas meja kayu jati berukir klasik", key: "Perundingan diplomatik" },
+                        where: { c1: "Cirebon, Gedung, Pegunungan", c2: "Rumah tua berarsitektur campuran kolonial-tropis di kaki gunung dengan halaman rumput luas berpagar putih", key: "Desa Linggarjati" },
+                        when: { c1: "November, Tahun, Empat", c2: "Kalender dinding memperlihatkan pertengahan bulan kesebelas tahun seribu sembilan ratus empat puluh enam", key: "10 - 15 November" },
+                        why: { c1: "Diplomasi, Dunia, Damai", c2: "Potongan koran internasional menampilkan tajuk utama tentang upaya penyelesaian konflik bersenjata lewat jalur meja hijau perundingan", key: "Tekanan dunia" },
+                        how: { c1: "Runding, Kompromi, Batas", c2: "Dua kelompok orang berjabat tangan di atas meja perundingan, sementara di luar gedung terlihat barisan tank militer bersiaga ketat", key: "Melalui perundingan maraton" }
+                    }
+                },
+                {
+                    title: "Runtuhnya Nilai Tukar Rupiah dan Krisis Ekonomi Nasional",
+                    clues: {
+                        who: { c1: "Mahasiswa, Rakyat, Pengusaha", c2: "Ribuan mahasiswa berikat kepala merah putih berorasi di atas atap bus kota dengan latar gedung parlemen", key: "Masyarakat Indonesia" },
+                        what: { c1: "Inflasi, Bangkrut, PHK", c2: "Deretan toko di pusat perbelanjaan tertutup rapat dengan coretan cat semprot bertuliskan Disewakan dan Tutup", key: "Krisis ekonomi parah" },
+                        where: { c1: "Jakarta, Indonesia, Nusantara", c2: "Peta wilayah kepulauan Indonesia dengan tanda panah merah menunjuk ke arah ibu kota yang dipenuhi kepulan asap hitam", key: "Seluruh wilayah" },
+                        when: { c1: "Sembilan, Puluh, Delapan", c2: "Halaman depan surat kabar nasional bertuliskan angka tahun 1998 dengan foto kerumunan massa di jalanan", key: "Pertengahan tahun 1998" },
+                        why: { c1: "Utang, Korup, Monopoli", c2: "Tumpukan lembaran uang rupiah kertas bernominal besar yang diikat tali rafia tetapi nilainya sudah sangat jatuh", key: "Utang luar negeri" },
+                        how: { c1: "Ambruk, Rupiah, Panik", c2: "Grafik nilai tukar mata uang yang merosot tajam dari ribuan rupiah langsung menjadi belasan ribu rupiah per dolar", key: "Kepanikan pasar" }
+                    }
+                }
+            ]
+        };
+
+        let gameState = {
+            players: ["Putri", "Aray", "Dea"],
+            level: 'easy',
+            currentCase: null,
+            answers: { p1: {}, p2: {}, p3: {} },
+            durations: { p1: "0m 45s", p2: "0m 52s", p3: "1m 10s" },
+            activeWorkspacePlayer: null,
+            activeCategory: null,
+            openedCards: {},
+            globalSeconds: 720,
+            timerInterval: null
+        };
+
+        const categoryTitles = {
+            who: "WHO",
+            when: "WHEN",
+            what: "WHAT",
+            where: "WHERE",
+            why: "WHY",
+            how: "HOW"
+        };
+
+        const playerCategoryMap = {
+            1: ['who', 'when'],
+            2: ['what', 'where'],
+            3: ['why', 'how']
+        };
+
+        function showPage(pageId) {
+            ['page-welcome', 'page-how-to-play', 'page-setup', 'page-level-select', 'page-board', 'page-workspace', 'page-results'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(pageId);
+            if (target) target.classList.remove('hidden');
+
+            const header = document.getElementById('main-header');
+            const timerContainer = document.getElementById('global-timer-container');
+
+            if (pageId === 'page-welcome' || pageId === 'page-how-to-play') {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+                if (pageId === 'page-setup' || pageId === 'page-level-select') {
+                    timerContainer.classList.remove('flex');
+                    timerContainer.classList.add('hidden');
+                } else {
+                    timerContainer.classList.remove('flex');
+                    timerContainer.classList.add('hidden');
+                }
+            }
+        }
+
+        function goToWelcome() {
+            clearInterval(gameState.timerInterval);
+            showPage('page-welcome');
+        }
+
+        function openHowToPlay() {
+            showPage('page-how-to-play');
+        }
+
+        function goToPlayerSetup() {
+            showPage('page-setup');
+        }
+
+        function goToLevelSelect() {
+            const p1 = document.getElementById('input-p1').value.trim();
+            const p2 = document.getElementById('input-p2').value.trim();
+            const p3 = document.getElementById('input-p3').value.trim();
+
+            if (!p1 || !p2 || !p3) {
+                showCustomModal("Warning", "Please enter 3 player names before playing");
+                return;
+            }
+
+            gameState.players = [p1, p2, p3];
+            document.getElementById('desk-name-1').innerText = p1;
+            document.getElementById('desk-name-2').innerText = p2;
+            document.getElementById('desk-name-3').innerText = p3;
+
+            showPage('page-level-select');
+        }
+
+        function selectLevel(lvl) {
+            gameState.level = lvl;
+            const casesList = casesData[lvl] && casesData[lvl].length > 0 ? casesData[lvl] : casesData.easy;
+            const randomCase = casesList[Math.floor(Math.random() * casesList.length)];
+            gameState.currentCase = randomCase;
+
+            document.getElementById('board-level-tag').innerText = `LEVEL : ${lvl.toUpperCase()}`;
+            document.getElementById('case-title').innerText = randomCase.title;
+
+            gameState.answers = { p1: {}, p2: {}, p3: {} };
+            gameState.openedCards = {};
+
+            showPage('page-board');
+            startGlobalTimer();
+        }
+
+        function startGlobalTimer() {
+            clearInterval(gameState.timerInterval);
+            gameState.globalSeconds = 720; // 12 minutes in seconds
+            updateTimerDisplay();
+
+            const timerContainer = document.getElementById('global-timer-container');
+            if (timerContainer) {
+                timerContainer.classList.remove('hidden');
+                timerContainer.classList.add('flex');
+            }
+
+            gameState.timerInterval = setInterval(() => {
+                gameState.globalSeconds--;
+                if (gameState.globalSeconds <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    gameState.globalSeconds = 0;
+                    updateTimerDisplay();
+                    triggerFinishGame();
+                    return;
+                }
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(gameState.globalSeconds / 60);
+            const secs = gameState.globalSeconds % 60;
+            const formatted = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            const timerEl = document.getElementById('global-timer');
+            if (timerEl) {
+                timerEl.innerText = formatted;
+            }
+        }
+
+        function openPlayerWorkspace(playerNum) {
+            gameState.activeWorkspacePlayer = playerNum;
+            const pName = gameState.players[playerNum - 1];
+            document.getElementById('ws-player-title').innerText = `Investigation Desk: ${pName}`;
+
+            const cats = playerCategoryMap[playerNum];
+            selectWorkspaceCategory(cats[0]);
+            showPage('page-workspace');
+            
+            // Ensure timer is visible in workspace too
+            const timerContainer = document.getElementById('global-timer-container');
+            if (timerContainer) {
+                timerContainer.classList.remove('hidden');
+                timerContainer.classList.add('flex');
+            }
+        }
+
+        function closePlayerWorkspace() {
+            updateBoardStatuses();
+            showPage('page-board');
+            
+            // Ensure timer is visible on board
+            const timerContainer = document.getElementById('global-timer-container');
+            if (timerContainer) {
+                timerContainer.classList.remove('hidden');
+                timerContainer.classList.add('flex');
+            }
+        }
+
+        function selectWorkspaceCategory(cat) {
+            gameState.activeCategory = cat;
+            const cats = playerCategoryMap[gameState.activeWorkspacePlayer];
+
+            const tabsContainer = document.getElementById('ws-tabs-container');
+            tabsContainer.innerHTML = '';
+            cats.forEach(c => {
+                const isActive = c === cat;
+                const btn = document.createElement('button');
+                btn.onclick = () => selectWorkspaceCategory(c);
+                btn.className = `py-3 font-syne font-bold text-xs rounded-xl transition cursor-pointer uppercase ${isActive ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow' : 'bg-slate-900/80 border border-slate-700/60 text-slate-300 hover:bg-slate-800'}`;
+                btn.innerText = categoryTitles[c];
+                tabsContainer.appendChild(btn);
+            });
+
+            document.getElementById('ws-clue-text').innerText = gameState.currentCase.title;
+
+            const pKey = `p${gameState.activeWorkspacePlayer}`;
+            const existingAnswer = gameState.answers[pKey][cat] || '';
+            document.getElementById('ws-answer-input').value = existingAnswer;
+
+            resetCardDisplay(cat);
+        }
+
+        function resetCardDisplay(cat) {
+            const cardKey = `${gameState.activeWorkspacePlayer}-${cat}`;
+            const openedType = gameState.openedCards[cardKey];
+
+            for (let i = 1; i <= 2; i++) {
+                const statusEl = document.getElementById(`card-status-${i}`);
+                const descEl = document.getElementById(`card-desc-${i}`);
+                const clueData = gameState.currentCase.clues[cat];
+
+                if (openedType === i) {
+                    statusEl.innerText = "Opened";
+                    statusEl.className = "text-[10px] text-amber-400 font-mono font-bold";
+                    descEl.innerText = i === 1 ? `"${clueData.c1}"` : `"${clueData.c2}"`;
+                    descEl.className = "text-[11px] text-amber-200 font-mono";
+                } else if (openedType && openedType !== i) {
+                    statusEl.innerText = "Locked";
+                    statusEl.className = "text-[10px] text-slate-500 font-mono";
+                    descEl.innerText = "[Limited — 1 Card Max]";
+                    descEl.className = "text-[11px] text-slate-500 italic";
+                } else {
+                    statusEl.innerText = "Locked";
+                    statusEl.className = "text-[10px] text-slate-400 font-mono";
+                    descEl.innerText = "[Locked — Click Open Clue]";
+                    descEl.className = "text-[11px] text-slate-400 italic";
+                }
+            }
+        }
+
+        function openSecretCard(cardNumber) {
+            const cat = gameState.activeCategory;
+            const cardKey = `${gameState.activeWorkspacePlayer}-${cat}`;
+
+            if (gameState.openedCards[cardKey]) {
+                showCustomModal("Warning", "You can only open 1 secret card per category");
+                return;
+            }
+
+            gameState.openedCards[cardKey] = cardNumber;
+            resetCardDisplay(cat);
+        }
+
+        function saveActiveCategoryAnswer() {
+            const pKey = `p${gameState.activeWorkspacePlayer}`;
+            const cat = gameState.activeCategory;
+            const val = document.getElementById('ws-answer-input').value.trim();
+
+            gameState.answers[pKey][cat] = val;
+            showCustomModal("Saved", "Your answer has been recorded successfully");
+            updateBoardStatuses();
+        }
+
+        function updateBoardStatuses() {
+            for (let i = 1; i <= 3; i++) {
+                const pKey = `p${i}`;
+                const cats = playerCategoryMap[i];
+                const badge = document.getElementById(`status-badge-${i}`);
+                const isComplete = cats.every(c => gameState.answers[pKey][c] && gameState.answers[pKey][c].length > 0);
+
+                if (isComplete) {
+                    badge.innerText = "Complete";
+                    badge.className = "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-mono text-[9px] font-bold";
+                } else {
+                    badge.innerText = "Incomplete";
+                    badge.className = "px-2 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[9px]";
+                }
+            }
+        }
+
+        function triggerFinishGame() {
+            clearInterval(gameState.timerInterval);
+            
+            // Hide timer when leaving investigation
+            const timerContainer = document.getElementById('global-timer-container');
+            if (timerContainer) {
+                timerContainer.classList.remove('flex');
+                timerContainer.classList.add('hidden');
+            }
+
+            renderResults();
+            showPage('page-results');
+        }
+
+        function evaluateAnswer(userAns, cat) {
+            if (!userAns) return false;
+            const correctKey = gameState.currentCase.clues[cat].key.toLowerCase();
+            return userAns.toLowerCase().includes(correctKey) || correctKey.includes(userAns.toLowerCase());
+        }
+
+        function renderResults() {
+            let scores = [];
+
+            for (let i = 1; i <= 3; i++) {
+                const pKey = `p${i}`;
+                const cats = playerCategoryMap[i];
+                let correctCount = 0;
+                cats.forEach(cat => {
+                    if (evaluateAnswer(gameState.answers[pKey][cat], cat)) {
+                        correctCount++;
+                    }
+                });
+                scores.push({
+                    playerNum: i,
+                    name: gameState.players[i - 1],
+                    score: correctCount,
+                    duration: gameState.durations[pKey] || "0m 45s",
+                    cats: cats
+                });
+            }
+
+            scores.sort((a, b) => b.score - a.score);
+
+            const tierSlots = [
+                { elId: 'podium-tier-1', data: scores[0], rankStr: '1ST WINNER' },
+                { elId: 'podium-tier-2', data: scores[1], rankStr: '2ND WINNER' },
+                { elId: 'podium-tier-3', data: scores[2], rankStr: '3RD WINNER' }
+            ];
+
+            tierSlots.forEach((tier) => {
+                const container = document.getElementById(tier.elId);
+                const s = tier.data;
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center pt-1">
+                        <div class="font-syne font-bold text-[8px] uppercase tracking-widest text-emerald-100">${tier.rankStr}</div>
+                        <div class="font-syne font-bold text-xs text-amber-200 truncate max-w-[140px]">${s.name}</div>
+                    </div>
+                `;
+            });
+
+            const breakdownList = document.getElementById('results-breakdown-list');
+            breakdownList.innerHTML = '';
+
+            for (let i = 1; i <= 3; i++) {
+                const pKey = `p${i}`;
+                const pName = gameState.players[i - 1];
+                const cats = playerCategoryMap[i];
+
+                let correctCount = 0;
+                cats.forEach(cat => {
+                    if (evaluateAnswer(gameState.answers[pKey][cat], cat)) {
+                        correctCount++;
+                    }
+                });
+
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'space-y-2 pt-2 border-t border-slate-800/80 first:border-0 first:pt-0';
+                const contentId = `resume-content-${i}`;
+
+                groupDiv.innerHTML = `
+                    <div class="bg-indigo-950/70 border border-amber-800/30 rounded-2xl p-4 cursor-pointer transition hover:bg-indigo-900/40" onclick="toggleResumeCard(${i})">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-syne font-bold text-sm text-white">${pName}</h4>
+                                <div class="text-[11px] font-mono text-amber-300 mt-1">Score: ${correctCount}/2</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span id="lock-icon-${i}" class="text-sm">🔒</span>
+                                <span class="text-[11px] font-mono text-indigo-300">Click to unlock</span>
+                            </div>
+                        </div>
+                        <div id="${contentId}" class="hidden space-y-3 pt-3 mt-3 border-t border-amber-800/20"></div>
+                    </div>
+                `;
+
+                const contentContainer = groupDiv.querySelector(`#${contentId}`);
+                cats.forEach(cat => {
+                    const userAns = gameState.answers[pKey][cat] || '(Tidak dijawab)';
+                    const isCorrect = evaluateAnswer(gameState.answers[pKey][cat], cat);
+                    const correctKey = gameState.currentCase.clues[cat].c1;
+
+                    const row = document.createElement('div');
+                    row.className = `p-3 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${isCorrect ? 'bg-emerald-950/20 border-emerald-500/30 text-emerald-300' : 'bg-rose-950/20 border-rose-500/30 text-rose-300'}`;
+                    row.innerHTML = `
+                        <div class="space-y-0.5">
+                            <span class="text-xs font-mono uppercase font-bold">${categoryTitles[cat]}</span>
+                            <div class="text-xs text-slate-300 font-medium">Jawaban: <span class="italic font-normal">"${userAns}"</span></div>
+                        </div>
+                        <div class="text-right text-xs font-mono">
+                            ${isCorrect ? '<span class="px-2.5 py-1 bg-emerald-500/20 rounded-full font-bold">✓ Benar</span>' : `<span class="px-2.5 py-1 bg-rose-500/20 rounded-full font-bold">✕ Salah</span><div class="text-[11px] text-slate-400 mt-1">Kunci: ${correctKey}</div>`}
+                        </div>
+                    `;
+                    contentContainer.appendChild(row);
+                });
+
+                breakdownList.appendChild(groupDiv);
+            }
+        }
+
+        function toggleResumeCard(playerNum) {
+            const content = document.getElementById(`resume-content-${playerNum}`);
+            const lockIcon = document.getElementById(`lock-icon-${playerNum}`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                lockIcon.innerText = '🔓';
+            } else {
+                content.classList.add('hidden');
+                lockIcon.innerText = '🔒';
+            }
+        }
+
+        function showCustomModal(title, message) {
+            let existingModal = document.getElementById('custom-alert-modal');
+            if (existingModal) existingModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'custom-alert-modal';
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm fade-in';
+            modal.innerHTML = `
+                <div class="glow-card p-6 rounded-2xl max-w-sm w-full border border-amber-500/30 text-center space-y-4">
+                    <h3 class="font-syne font-bold text-lg text-amber-300">${title}</h3>
+                    <p class="text-xs text-slate-300 font-mono">${message}</p>
+                    <button onclick="document.getElementById('custom-alert-modal').remove()" class="w-full py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-syne font-bold text-xs rounded-xl shadow cursor-pointer">
+                        OK
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        window.onload = function () {
+            showPage('page-welcome');
+        };
+    </script>
+</body>
+</html>
