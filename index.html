@@ -9,12 +9,16 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Space Mono', monospace;
-            background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #09090b 70%);
-            color: #f8fafc;
-            min-height: 100vh;
-        }
+       body {
+    font-family: 'Space Mono', monospace;
+    background-image: linear-gradient(rgba(15, 23, 42, 0.20), rgba(15, 23, 42, 0.20)), url('BG.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f8fafc;
+    min-height: 100vh;
+}
         .font-artistic-wavy {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -23,8 +27,9 @@
             font-family: 'Syne', sans-serif;
         }
         .glow-triangle {
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
-        }
+    box-shadow: 0 0 35px rgba(251, 191, 36, 0.9);
+    border: 2px solid rgba(251, 191, 36, 0.8);
+}
         .glow-card {
             background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -81,30 +86,30 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
             <div class="glow-card p-6 rounded-2xl space-y-6 text-sm text-slate-300">
                 <div class="space-y-2 text-center">
                     <h3 class="font-syne font-bold text-amber-300 text-xs uppercase tracking-wider">DESCRIPTION</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed font-mono">Triangle of Mind adalah permainan interaktif bertema Detective Syndicate. Permainan ini dirancang untuk menguji kerja sama tim, ketajaman logika, dan kemampuan memecahkan masalah dalam batas waktu tertentu. Para pemain berperan sebagai detektif yang memecahkan kasus berdasarkan tingkat kesulitan yang dipilih.</p>
+                    <p class="text-xs text-slate-300 leading-relaxed font-mono">Triangle of Mind is an interactive game themed around the Detective Syndicate. This game is designed to test teamwork, logical reasoning, and problem-solving skills within a set time limit. Players act as detectives solving cases based on their chosen difficulty level.</p>
                 </div>
                 <div class="space-y-3 pt-4 border-t border-white/10 text-center">
                     <h3 class="font-syne font-bold text-amber-300 text-xs uppercase tracking-wider">HOW TO PLAY</h3>
                     <div class="space-y-2 text-xs font-mono text-left pt-1">
                         <div class="flex items-start space-x-3">
                             <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
-                            <p>Masukkan nama 3 pemain yang akan berperan sebagai detektif sebelum memulai investigasi.</p>
+                            <p>Enter the names of 3 players who will act as detectives before starting the investigation.</p>
                         </div>
                         <div class="flex items-start space-x-3">
                             <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">2</span>
-                            <p>Pilih tingkat kesulitan kasus investigasi yang diinginkan (Easy, Medium, atau Hard).</p>
+                            <p>elect your desired investigation case level (Easy, Medium, or Hard).</p>
                         </div>
                         <div class="flex items-start space-x-3">
                             <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">3</span>
-                            <p>Satu pemain memulai investigasi terlebih dahulu berdasarkan petunjuk kasus utama yang tersedia.</p>
+                            <p>One player begins the investigation first based on the available main case clues.</p>
                         </div>
                         <div class="flex items-start space-x-3">
                             <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">4</span>
-                            <p>Setiap pemain memiliki kesempatan untuk membuka kartu petunjuk sebanyak 1 kali pada setiap kategori. Kartu petunjuk yang didapat boleh diberitahukan kepada pemain lain, kecuali hasil jawaban.</p>
+                            <p>Each player has the opportunity to open a clue card once per category. The acquired clue cards can be shared with other players, except for the final answer.</p>
                         </div>
                         <div class="flex items-start space-x-3">
                             <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0 text-[10px]">5</span>
-                            <p>Pemenang ditentukan berdasarkan jumlah jawaban benar serta kecepatan penyelesaian dalam batas waktu permainan selama 12 menit.</p>
+                            <p>​The winner is determined by the number of correct answers combined with completion speed within the 12-minute gameplay limit.</p>
                         </div>
                     </div>
                 </div>
@@ -137,7 +142,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                         Back
                     </button>
                     <button onclick="goToLevelSelect()" class="w-2/3 py-3.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-600 hover:opacity-95 text-white font-syne font-bold text-xs rounded-xl shadow-lg transition cursor-pointer">
-                        CONTINUE
+                        NEXT
                     </button>
                 </div>
             </div>
@@ -151,15 +156,15 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
             <div class="space-y-4">
                 <div onclick="selectLevel('easy')" class="glow-card p-5 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition cursor-pointer space-y-1">
                     <div class="font-syne font-bold text-emerald-400 text-sm">LEVEL 1 — EASY</div>
-                    <div class="text-xs text-slate-400">Kasus pengetahuan dasar dengan petunjuk langsung dan analisis logika sederhana.</div>
+                    <div class="text-xs text-slate-400">Basic knowledge cases with direct clues and simple logical analysis.</div>
                 </div>
                 <div onclick="selectLevel('medium')" class="glow-card p-5 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition cursor-pointer space-y-1">
                     <div class="font-syne font-bold text-amber-400 text-sm">LEVEL 2 — MEDIUM</div>
-                    <div class="text-xs text-slate-400">Kasus dengan tingkat kesulitan menengah yang membutuhkan analisis hubungan sebab-akibat dari fenomena alam dan sains.</div>
+                    <div class="text-xs text-slate-400">Intermediate difficulty cases requiring cause-and-effect analysis of natural and scientific phenomena.</div>
                 </div>
                 <div onclick="selectLevel('hard')" class="glow-card p-5 rounded-2xl border border-rose-500/30 hover:border-rose-400 transition cursor-pointer space-y-1">
                     <div class="font-syne font-bold text-rose-400 text-sm">LEVEL 3 — HARD</div>
-                    <div class="text-xs text-slate-400">Kasus kompleks dengan petunjuk abstrak yang membutuhkan pemikiran kritis dan tingkat logika yang tinggi untuk mengupas tuntas peristiwa sejarah, serta ekonomi.</div>
+                    <div class="text-xs text-slate-400">Complex cases with abstract clues requiring critical thinking and high-level logic to thoroughly examine historical and economic events.</div>
                 </div>
             </div>
             <div class="text-center pt-2">
@@ -294,7 +299,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                 <div class="space-y-1.5 pt-2">
                     <label class="text-[11px] font-syne text-slate-400 uppercase tracking-wider">Your Answer (Secret)</label>
                     <div class="flex gap-2">
-                        <input type="text" id="ws-answer-input" placeholder="Ketik jawaban Anda di sini..." class="flex-1 px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-xs">
+                        <input type="text" id="ws-answer-input" placeholder="Enter your answer here" class="flex-1 px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-xs">
                         <button onclick="saveActiveCategoryAnswer()" class="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:opacity-95 text-white font-syne font-bold text-xs rounded-xl shadow transition cursor-pointer">
                             SAVE
                         </button>
@@ -306,11 +311,6 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
         <!-- 7. RESULTS PAGE -->
         <section id="page-results" class="w-full hidden space-y-6 fade-in py-2">
             <div class="text-center space-y-1">
-                <div class="w-14 h-14 mx-auto glow-card border border-amber-600/40 rounded-2xl flex items-center justify-center glow-triangle mb-2">
-                    <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                    </svg>
-                </div>
                 <h3 class="font-artistic-wavy text-amber-300 text-lg font-bold tracking-wide">Congratulations</h3>
                 <h2 class="font-syne text-xl font-bold text-white tracking-wide">Investigation Results</h2>
             </div>
@@ -836,10 +836,10 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                     row.innerHTML = `
                         <div class="space-y-0.5">
                             <span class="text-xs font-mono uppercase font-bold">${categoryTitles[cat]}</span>
-                            <div class="text-xs text-slate-300 font-medium">Jawaban: <span class="italic font-normal">"${userAns}"</span></div>
+                            <div class="text-xs text-slate-300 font-medium">Answer: <span class="italic font-normal">"${userAns}"</span></div>
                         </div>
                         <div class="text-right text-xs font-mono">
-                            ${isCorrect ? '<span class="px-2.5 py-1 bg-emerald-500/20 rounded-full font-bold">✓ Benar</span>' : `<span class="px-2.5 py-1 bg-rose-500/20 rounded-full font-bold">✕ Salah</span><div class="text-[11px] text-slate-400 mt-1">Kunci: ${correctKey}</div>`}
+                            ${isCorrect ? '<span class="px-2.5 py-1 bg-emerald-500/20 rounded-full font-bold">✓ True</span>' : `<span class="px-2.5 py-1 bg-rose-500/20 rounded-full font-bold">✕ False</span><div class="text-[11px] text-slate-400 mt-1">Answer Key: ${correctKey}</div>`}
                         </div>
                     `;
                     contentContainer.appendChild(row);
