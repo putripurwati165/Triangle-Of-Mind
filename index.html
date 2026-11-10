@@ -199,7 +199,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                 <div id="desk-card-1" class="absolute left-1/2 transform -translate-x-1/2 top-2 w-52 glow-card p-3 rounded-2xl border border-indigo-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
                     <div class="w-full flex items-center justify-between text-[11px] font-syne">
                         <span class="px-1.5 py-0.5 bg-indigo-900/80 rounded text-indigo-300 font-bold">P1</span>
-                        <span id="status-badge-1" class="px-2 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[9px]">Incomplete</span>
+                        <span id="status-badge-1" class="px-2 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[9px]">Unsolved</span>
                     </div>
                     <div>
                         <div id="desk-name-1" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Putri</div>
@@ -214,7 +214,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                 <div id="desk-card-2" class="absolute left-0 bottom-4 w-36 glow-card p-2.5 rounded-2xl border border-purple-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
                     <div class="w-full flex items-center justify-between text-[11px] font-syne">
                         <span class="px-1.5 py-0.5 bg-purple-900/80 rounded text-purple-300 font-bold">P2</span>
-                        <span id="status-badge-2" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Incomplete</span>
+                        <span id="status-badge-2" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Unsolved</span>
                     </div>
                     <div>
                         <div id="desk-name-2" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Dea</div>
@@ -229,7 +229,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                 <div id="desk-card-3" class="absolute right-0 bottom-4 w-36 glow-card p-2.5 rounded-2xl border border-amber-500/30 flex flex-col items-center text-center space-y-1.5 z-30 transition hover:border-amber-500/50 shadow-md">
                     <div class="w-full flex items-center justify-between text-[11px] font-syne">
                         <span class="px-1.5 py-0.5 bg-amber-900/80 rounded text-amber-300 font-bold">P3</span>
-                        <span id="status-badge-3" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Incomplete</span>
+                        <span id="status-badge-3" class="px-1.5 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[8px]">Unsolved</span>
                     </div>
                     <div>
                         <div id="desk-name-3" class="font-syne font-bold text-amber-300 text-xs tracking-wide">Aray</div>
@@ -721,10 +721,10 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                 const isComplete = cats.every(c => gameState.answers[pKey][c] && gameState.answers[pKey][c].length > 0);
 
                 if (isComplete) {
-                    badge.innerText = "Complete";
+                    badge.innerText = "Solved";
                     badge.className = "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-mono text-[9px] font-bold";
                 } else {
-                    badge.innerText = "Incomplete";
+                    badge.innerText = "Unsolved";
                     badge.className = "px-2 py-0.5 bg-slate-800/80 text-slate-400 rounded-full font-mono text-[9px]";
                 }
             }
@@ -839,7 +839,7 @@ g" alt="Logo" class="w-10 h-10 object-contain rounded-xl">
                             <div class="text-xs text-slate-300 font-medium">Answer: <span class="italic font-normal">"${userAns}"</span></div>
                         </div>
                         <div class="text-right text-xs font-mono">
-                            ${isCorrect ? '<span class="px-2.5 py-1 bg-emerald-500/20 rounded-full font-bold">✓ True</span>' : `<span class="px-2.5 py-1 bg-rose-500/20 rounded-full font-bold">✕ False</span><div class="text-[11px] text-slate-400 mt-1">Answer Key: ${correctKey}</div>`}
+                            ${isCorrect ? '<span class="px-2.5 py-1 bg-emerald-500/20 rounded-full font-bold">✓ Correct</span>' : `<span class="px-2.5 py-1 bg-rose-500/20 rounded-full font-bold">✕ Incorrect</span><div class="text-[11px] text-slate-400 mt-1">Answer Key: ${correctKey}</div>`}
                         </div>
                     `;
                     contentContainer.appendChild(row);
